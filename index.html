@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Mi Niña 💖</title>
+
+<style>
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    background: black;
+    color: white;
+    text-align: center;
+}
+
+/* GALAXIA */
+#galaxy {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    background: radial-gradient(circle at center, #050510 0%, #000000 70%);
+    overflow: hidden;
+    display: none;
+}
+
+/* CONTENEDOR CENTRAL 70% */
+#universe {
+    position: absolute;
+    width: 70%;
+    left: 15%; /* centra el 70% */
+    height: 100%;
+}
+
+/* ESTRELLAS */
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    animation: blink 2s infinite alternate;
+}
+
+@keyframes blink {
+    from { opacity: 0.2; }
+    to { opacity: 1; }
+}
+
+/* FRASES */
+.phrase {
+    position: absolute;
+    color: #ffb6e6;
+    font-size: 16px;
+    white-space: nowrap;
+    animation: float linear infinite;
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(100vh);
+        opacity: 1;
+    }
+
+    90% {
+        transform: translateY(0vh);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(-10vh);
+        opacity: 0;
+    }
+}
+
+/* MENSAJE INICIAL */
+.message {
+    position: relative;
+    z-index: 10;
+    top: 30%;
+    transition: opacity 1s ease;
+}
+
+button {
+    padding: 14px 28px;
+    font-size: 18px;
+    border: none;
+    border-radius: 15px;
+    background: #ff4fa3;
+    color: white;
+    cursor: pointer;
+    margin-top: 20px;
+}
+
+button:hover {
+    background: #ff77bb;
+}
+</style>
+</head>
+
+<body>
+
+<div class="message" id="message">
+    <h1>Para Ti, Mi Niña 💕</h1>
+    <p>Aunque la distancia nos separe, mi corazón vive contigo cada día.</p>
+    <p><strong>A y D</strong></p>
+    <button onclick="revealGalaxy()">Descubre nuestro amor en las estrellas ✨</button>
+</div>
+
+<div id="galaxy">
+    <div id="universe"></div>
+</div>
+
+<audio id="music" loop>
+    <source src="AhaTok_Angel_664c63de-7999-4b59-b96f-c50831505653.mp3" type="audio/mpeg">
+</audio>
+
+<script>
+const galaxy = document.getElementById("galaxy");
+const universe = document.getElementById("universe");
+const message = document.getElementById("message");
+const music = document.getElementById("music");
+
+/* FRASES */
+const frases = [
+"Mi amor eterno 💖",
+"Eres mi universo 🌌",
+"Mi niña hermosa",
+"Contigo todo es magia ✨",
+"Siempre tú y yo",
+"Mi corazón es tuyo",
+"La distancia no nos vence",
+"Eres mi estrella favorita ⭐",
+"Te amo infinitamente",
+"Mi vida eres tú",
+"Mi razón de sonreír",
+"Mi amor bonito",
+"Mi princesa hermosa",
+"Mi alma te pertenece",
+"Siempre juntos",
+"Mi cielo precioso",
+"Mi corazón late por ti",
+"Eres mi destino",
+"Nuestro amor no tiene límites",
+"Siempre serás mi hogar",
+"Te amo más cada día",
+"Mi dulce niña",
+"Mi universo entero eres tú",
+"Amor sin fronteras",
+"Eres mi sueño hecho realidad"
+];
+
+/* CREAR ESTRELLAS */
+for(let i=0; i<300; i++){
+    let star = document.createElement("div");
+    star.className = "star";
+    star.style.top = Math.random()*100 + "%";
+    star.style.left = Math.random()*100 + "%";
+    star.style.animationDuration = (Math.random()*3+1)+"s";
+    galaxy.appendChild(star);
+}
+
+function revealGalaxy(){
+
+    message.style.opacity = "0";
+
+    setTimeout(() => {
+        message.style.display = "none";
+        galaxy.style.display = "block";
+        music.play();
+
+        /* GENERAR FRASES MÁS SEPARADAS */
+        for(let i=0; i<100; i++){
+            let phrase = document.createElement("div");
+            phrase.className = "phrase";
+            phrase.innerText = frases[Math.floor(Math.random()*frases.length)];
+
+            /* Distribución horizontal dentro del 70% */
+            phrase.style.left = Math.random()*100 + "%";
+
+            /* Separación vertical inicial más espaciada */
+            phrase.style.top = (100 + i*3) + "%";
+
+            phrase.style.animationDuration = (20 + Math.random()*10) + "s";
+
+            universe.appendChild(phrase);
+        }
+
+    }, 1000);
+}
+</script>
+
+</body>
+</html>
